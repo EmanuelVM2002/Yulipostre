@@ -2,11 +2,12 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Deliciosos Postres · Haz tu pedido</title>
 <meta name="description" content="Postres artesanales en vasito de 8 onzas: Maracuyá, Frutos rojos, Limón y Pavé de leche Klim. Arma tu pedido y envíalo por WhatsApp.">
 <meta name="theme-color" content="#ff4d94">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🍮%3C/text%3E%3C/svg%3E">
+<script>if(/[?&]mockup/.test(location.search))document.documentElement.classList.add("static")</script>
+<link rel="icon"href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🍮%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Caveat:wght@500;700&family=Nunito:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
@@ -28,6 +29,8 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
 html{overflow-x:clip}
+/* modo estático: solo lo usa mockup.html (index.html?mockup) para sacar la imagen sin animaciones a medias */
+html.static .title .ch{animation:none!important;opacity:1!important;transform:none!important}
 body{
   font-family:var(--font-body);color:var(--choco);background:var(--cream);
   overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5;
@@ -119,7 +122,7 @@ a{color:inherit}
   box-shadow:0 14px 30px -10px rgba(58,27,19,.6);animation:sticker 4s ease-in-out infinite}
 .sticker small{display:block;font-family:var(--font-hand);font-size:1.2rem;font-weight:700;line-height:1}
 .sticker strong{display:block;font-family:var(--font-head);font-size:1.7rem;line-height:1;color:var(--choco)}
-.note.n2{position:absolute;right:0;top:-6px;max-width:170px;text-align:right;font-size:1.35rem;transform:rotate(4deg);z-index:4}
+.note.n2{position:absolute;right:2%;top:-52px;max-width:330px;text-align:right;font-size:1.35rem;line-height:1.1;transform:rotate(3deg);z-index:4}
 @media(max-width:900px){
   .hero{padding-top:110px}
   .hero-grid{grid-template-columns:1fr;text-align:center}
@@ -245,7 +248,7 @@ section{position:relative}
 .foot a.wa-link:hover{background:var(--wa);transform:scale(1.05)}
 
 /* ───────── barra inferior + toast + modal ───────── */
-.bar{position:fixed;left:50%;bottom:18px;transform:translate(-50%,160%);z-index:60;width:min(560px,100% - 28px);
+.bar{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translate(-50%,160%);z-index:60;width:min(560px,100% - 28px);
   background:var(--choco);color:#fff;border-radius:99px;padding:10px 10px 10px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;
   box-shadow:0 20px 40px -12px rgba(58,27,19,.8);transition:transform .5s cubic-bezier(.2,1.4,.4,1)}
 .bar.show{transform:translate(-50%,0)}
@@ -270,13 +273,6 @@ section{position:relative}
 .card.spot{translate:0 -12px;scale:1.05;border-color:var(--accent);box-shadow:0 34px 60px -24px var(--accent);z-index:2}
 .card{transition:transform .2s ease-out,border-color .3s,box-shadow .3s,translate .25s,scale .25s}
 .card.winner{animation:winner .9s}
-.count{margin-top:26px;background:var(--choco);color:#fff;border-radius:34px;padding:22px 28px;display:flex;align-items:center;justify-content:center;gap:10px 30px;flex-wrap:wrap;text-align:center}
-.count .t{font-family:var(--font-hand);font-size:1.9rem;font-weight:700;color:var(--yellow);line-height:1.05}
-.cd{display:flex;gap:10px}
-.cd div{background:rgba(255,255,255,.1);border-radius:18px;padding:8px 12px;text-align:center;min-width:70px}
-.cd b{display:block;font-family:var(--font-head);font-size:2rem;line-height:1.1;font-variant-numeric:tabular-nums}
-.cd b.tick{animation:pop .35s}
-.cd small{font-weight:700;opacity:.8;font-size:.8rem}
 
 /* ───────── estela del cursor ───────── */
 .trail{position:fixed;pointer-events:none;z-index:120;font-size:16px;animation:trail .9s ease-out forwards}
@@ -349,7 +345,8 @@ section{position:relative}
 .runner button{color:var(--pink-d);text-decoration:underline;font-weight:800}
 
 /* ───────── botón flotante de WhatsApp ───────── */
-.wa-float{position:fixed;right:18px;bottom:18px;z-index:70;display:flex;flex-direction:column;align-items:flex-end;gap:12px;transition:bottom .5s cubic-bezier(.2,1.4,.4,1)}
+.wa-float{position:fixed;right:18px;bottom:18px;z-index:70;display:flex;flex-direction:column;align-items:flex-end;gap:12px;transition:bottom .5s cubic-bezier(.2,1.4,.4,1);pointer-events:none}
+.wa-float .wa-fab{pointer-events:auto}
 body.has-bar .wa-float{bottom:96px}
 .wa-fab{position:relative;width:66px;height:66px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 14px 30px -8px rgba(18,140,74,.85);animation:waRing 2.4s infinite;transition:transform .25s}
 .wa-fab:hover{transform:scale(1.1) rotate(-8deg)}
@@ -399,6 +396,97 @@ body.has-bar .wa-float{bottom:96px}
 @keyframes lineIn{from{opacity:0;transform:translateX(30px) scale(.9)}}
 @keyframes lineOut{to{opacity:0;transform:translateX(-40px) scale(.8);height:0;padding:0;margin:0}}
 
+/* ───────── ajustes para celular y tablet ───────── */
+@media(max-width:900px){
+  .summary{position:static}
+  .sec{padding-top:80px}
+  .order{padding:80px 0 130px}
+}
+@media(max-width:700px){
+  .wrap{width:min(1180px,100% - 32px)}
+  .hero{min-height:auto;padding:92px 0 64px}
+  .note.n1{font-size:1.35rem}
+  .lead{font-size:1.05rem;margin:12px auto 22px}
+  .btn{font-size:1.05rem;padding:13px 24px}
+  .cta-row{flex-direction:column;align-items:stretch;gap:10px;max-width:340px;margin-inline:auto}
+  .cta-row .btn{width:100%}
+  .hero-badges{gap:8px;margin-top:22px}
+  .pill{font-size:.85rem;padding:7px 12px}
+  .collage{width:min(330px,100%);margin-top:30px}
+  .bubble{border-width:5px}
+  .sticker{width:96px;height:96px;border-width:3px}
+  .sticker small{font-size:1rem}.sticker strong{font-size:1.3rem}
+  .ribbon span{font-size:1.05rem;padding:0 18px}
+  .sec-head{margin-bottom:34px}
+  .hl{padding:4px 26px 10px}
+
+  /* tarjetas en horizontal: más compactas */
+  .grid{grid-template-columns:1fr;max-width:none;gap:16px}
+  .card{display:grid;grid-template-columns:112px 1fr;column-gap:16px;align-items:center;text-align:left;padding:16px 16px 16px 14px;border-radius:24px;transform:none}
+  .card-art{grid-row:1/4;width:112px;margin:0}
+  .tag{right:-14%;top:-6%;font-size:.7rem;padding:3px 9px}
+  .emoji-pop{font-size:1.4rem;left:-8%}
+  .card h3{font-size:1.2rem;transform:none}
+  .card p{font-size:.85rem;min-height:0;margin:3px 0 10px;line-height:1.35}
+  .card-foot{grid-column:2}
+  .price{font-size:1.3rem}
+  .btn-add{padding:9px 14px;font-size:.95rem}
+  .step button{width:36px;height:36px}
+  .surprise{width:100%;max-width:320px}
+
+  /* info */
+  .info{padding-top:60px}
+  .info-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .chip{flex-direction:column;align-items:flex-start;gap:6px;padding:18px 16px;border-radius:26px}
+  .chip .ic{font-size:2rem}.chip small{font-size:1.25rem}.chip strong{font-size:1.2rem}
+
+  /* test */
+  .quiz{padding-top:50px}
+  .quiz-box{padding:20px 16px;border-radius:30px}
+  .q-top{gap:12px;margin-bottom:16px}
+  .q-count{font-size:.9rem}
+  .q-card .qe{font-size:2.6rem}
+  .q-card h3{margin-bottom:14px}
+  .opt{min-height:58px;padding:11px 14px;border-radius:18px}
+  .q-main{gap:16px}
+  .live{order:-1;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:12px;border-radius:22px}
+  .live h4{display:none}
+  .live small{grid-column:1/-1;margin:2px 0 0;text-align:center;font-size:.85rem}
+  .live .lv{grid-template-columns:1fr;justify-items:center;text-align:center;gap:4px;margin:0}
+  .live .lv>div{width:100%}
+  .live .lv img{width:40px;height:40px}
+  .live .lv .nm{justify-content:center}
+  .live .lv .nm span:first-child{display:none}
+  .live .lv .tr{margin-top:2px}
+  .res{gap:22px}
+  .res-pic{width:min(230px,66vw)}
+  .res-cta{flex-direction:column;align-items:stretch}
+  .res-cta .btn{width:100%}
+  .mode{padding:16px 14px;display:flex;align-items:center;gap:14px;text-align:left}
+  .mode .e{font-size:2rem}
+
+  /* pedido */
+  .panel{padding:22px 18px;border-radius:28px}
+  .panel h3{font-size:1.4rem}
+  .steps{margin-top:-10px}
+  .stp{font-size:.9rem}
+  .total strong{font-size:2rem}
+  .modal .box{padding:30px 22px;border-radius:30px}
+  .foot{padding-bottom:150px}
+
+  /* flotantes */
+  .wa-fab{width:56px;height:56px}.wa-fab svg{width:30px;height:30px}
+  body.has-bar .wa-float{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+  body.in-order .wa-float{opacity:0;pointer-events:none;transform:translateY(20px)}
+  .toast{top:70px}
+}
+@media(max-width:380px){
+  .card{grid-template-columns:96px 1fr;column-gap:12px}
+  .card-art{width:96px}
+  .title .l1{font-size:3rem}
+  .title .l2{font-size:3.6rem}
+}
+
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none}
@@ -443,8 +531,8 @@ body.has-bar .wa-float{bottom:96px}
       </div>
       <div class="hero-badges">
         <span class="pill">🥤 <span data-bind="tamano">8 onzas</span></span>
-        <span class="pill">🚚 Entrega <span data-bind="entrega">8 de octubre</span></span>
-        <span class="pill">💳 Pago <span data-bind="pago">15 de octubre</span></span>
+        <span class="pill">🍓 4 sabores</span>
+        <span class="pill">💬 Pedido por WhatsApp</span>
       </div>
     </div>
 
@@ -491,19 +579,8 @@ body.has-bar .wa-float{bottom:96px}
   <div class="wrap info-grid">
     <div class="chip c1 reveal" style="--rd:0s"><span class="ic">🥤</span><div><small>Tamaño:</small><strong data-bind="tamano">8 onzas</strong></div></div>
     <div class="chip c2 reveal" style="--rd:.1s"><span class="ic">🏷️</span><div><small>Precio:</small><strong data-count>$12.000</strong></div></div>
-    <div class="chip c3 reveal" style="--rd:.2s"><span class="ic">📅</span><div><small>Entrega:</small><strong data-bind="entrega">8 de octubre</strong></div></div>
-    <div class="chip c4 reveal" style="--rd:.3s"><span class="ic">💳</span><div><small>Pago:</small><strong data-bind="pago">15 de octubre</strong></div></div>
-  </div>
-  <div class="wrap">
-    <div class="count reveal" id="count" hidden>
-      <span class="t" id="countT">Falta para la entrega 🚚</span>
-      <div class="cd" aria-live="off">
-        <div><b data-u="d">0</b><small>días</small></div>
-        <div><b data-u="h">0</b><small>horas</small></div>
-        <div><b data-u="m">0</b><small>min</small></div>
-        <div><b data-u="s">0</b><small>seg</small></div>
-      </div>
-    </div>
+    <div class="chip c3 reveal" style="--rd:.2s"><span class="ic">🍓</span><div><small>Sabores:</small><strong>4 para elegir</strong></div></div>
+    <div class="chip c4 reveal" style="--rd:.3s"><span class="ic">💬</span><div><small>Pedido:</small><strong>Por WhatsApp</strong></div></div>
   </div>
 </section>
 
@@ -538,7 +615,7 @@ body.has-bar .wa-float{bottom:96px}
         </div>
         <div class="reminder">
           <span style="font-size:1.8rem">📌</span>
-          <div><b>Recuerda</b>Entrega el <span data-bind="entrega">8 de octubre</span> · Pago el <span data-bind="pago">15 de octubre</span>.</div>
+          <div><b>¿Cómo sigue?</b>Te confirmamos tu pedido por WhatsApp.</div>
         </div>
       </form>
 
@@ -614,10 +691,6 @@ const CONFIG = {
   negocio: "Deliciosos Postres",
   precio: 12000,
   tamano: "8 onzas",
-  entrega: "8 de octubre",
-  pago: "15 de octubre",
-  // Fecha exacta de entrega para la cuenta regresiva (AAAA-MM-DDTHH:MM)
-  entregaISO: "2026-10-08T00:00"
 };
 
 const SABORES = [
@@ -824,7 +897,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ── barra inferior: solo si no estás viendo el pedido ── */
   let orderVisible = false;
-  new IntersectionObserver(es => { orderVisible = es[es.length - 1].isIntersecting; updateBar(); }, { threshold: [0, .1] }).observe($("#pedido"));
+  new IntersectionObserver(es => {
+    orderVisible = es[es.length - 1].isIntersecting;
+    document.body.classList.toggle("in-order", orderVisible); updateBar();
+  }, { threshold: [0, .1] }).observe($("#pedido"));
   function updateBar() {
     const on = totals().qty > 0 && !orderVisible;
     $("#bar").classList.toggle("show", on); document.body.classList.toggle("has-bar", on);
@@ -873,9 +949,6 @@ document.addEventListener("DOMContentLoaded", () => {
       `👤 *Nombre:* ${n}`,
       lugar ? `📍 *Lugar de entrega:* ${lugar}` : "",
       notas ? `📝 *Notas:* ${notas}` : "",
-      "",
-      `📅 Entrega: ${CONFIG.entrega}`,
-      `💳 Pago: ${CONFIG.pago}`,
       "",
       "¡Gracias! 💖"
     ].filter((l, i, a) => !(l === "" && a[i - 1] === "")).join("\n");
@@ -943,7 +1016,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const WA_MSGS = [
     ["🍮", "Quiero hacer un pedido", `¡Hola! 👋 Quiero hacer un pedido de *${CONFIG.negocio}* 🍮. ¿Me ayudas, por favor?`],
     ["💰", "Sabores y precios", `¡Hola! 👋 Quisiera saber los sabores y precios de los postres 🍓🍋🥭🍫`],
-    ["📅", "Fechas de entrega y pago", `¡Hola! 👋 Quisiera confirmar las fechas: entrega el ${CONFIG.entrega} y pago el ${CONFIG.pago}. ¿Está bien?`],
     ["🎁", "Pedido grande o para un evento", `¡Hola! 👋 Quiero hacer un pedido grande de postres para un evento 🎉. ¿Me cuentas cómo hacemos?`],
     ["✍️", "Escribir mi propia pregunta", `¡Hola! 👋 Vi la página de *${CONFIG.negocio}* y tengo una consulta: `]
   ];
@@ -955,21 +1027,6 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#waClose").addEventListener("click", () => waToggle(false));
   setTimeout(() => { if (!wf.classList.contains("seen")) wf.classList.add("hint"); }, 6000);
   setTimeout(() => wf.classList.remove("hint"), 13000);
-
-  /* ── cuenta regresiva a la entrega ── */
-  const cdBox = $("#count"), target = new Date(CONFIG.entregaISO).getTime();
-  if (!isNaN(target)) {
-    const U = {}; $$("[data-u]", cdBox).forEach(b => U[b.dataset.u] = b);
-    const setU = (k, v) => { const t = String(v); if (U[k].textContent !== t) { U[k].textContent = t; U[k].classList.remove("tick"); void U[k].offsetWidth; U[k].classList.add("tick"); } };
-    const tickCd = () => {
-      let s = Math.floor((target - Date.now()) / 1000);
-      if (s <= 0) { cdBox.hidden = true; return false; }
-      cdBox.hidden = false;
-      setU("d", Math.floor(s / 86400)); setU("h", Math.floor(s % 86400 / 3600)); setU("m", Math.floor(s % 3600 / 60)); setU("s", s % 60);
-      return true;
-    };
-    if (tickCd()) { const iv = setInterval(() => { if (!tickCd()) clearInterval(iv); }, 1000); }
-  }
 
   /* ── ¡Sorpréndeme! ── */
   let spinning = false;

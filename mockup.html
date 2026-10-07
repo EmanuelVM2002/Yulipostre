@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup · Deliciosos Postres</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@600;700&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff4d94;--choco:#3a1b13;--cream:#fff4e8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;font-family:'Nunito',system-ui,sans-serif;color:var(--choco);
+  background:radial-gradient(700px 500px at 10% 10%,#ffd6e7,transparent 70%),radial-gradient(600px 500px at 95% 90%,#e4f3c8,transparent 70%),radial-gradient(500px 400px at 90% 5%,#ffeeb8,transparent 70%),var(--cream);
+  padding:40px 20px 60px;overflow-x:hidden}
+header{text-align:center;margin-bottom:34px}
+header h1{font-family:'Pacifico',cursive;font-weight:400;font-size:clamp(2rem,5vw,3.2rem);color:var(--choco)}
+header h1 b{color:var(--pink);font-weight:400}
+header p{font-weight:700;opacity:.75;margin-top:6px}
+.stage{position:relative;width:min(1180px,100%);margin-inline:auto}
+
+/* ── computador ── */
+.laptop{width:80%;filter:drop-shadow(0 40px 40px rgba(58,27,19,.35))}
+.lid{background:#1d1d22;border-radius:18px 18px 6px 6px;padding:2.2% 2.2% 3%;position:relative}
+.lid::before{content:"";position:absolute;top:1.1%;left:50%;width:6px;height:6px;border-radius:50%;background:#444;transform:translateX(-50%)}
+.view{position:relative;overflow:hidden;border-radius:6px;background:#fff}
+.view iframe{position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform-origin:0 0}
+.base{height:16px;margin:0 -3%;background:linear-gradient(#d8d8de,#b9b9c2);border-radius:0 0 18px 18px;position:relative}
+.base::after{content:"";position:absolute;left:50%;top:0;width:16%;height:7px;background:#a4a4ad;border-radius:0 0 10px 10px;transform:translateX(-50%)}
+
+/* ── celular ── */
+.phone{position:absolute;right:0;bottom:-24px;width:23%;filter:drop-shadow(0 30px 34px rgba(58,27,19,.45))}
+.body{background:#18181c;border-radius:15% / 7%;padding:3.6%;position:relative;border:2px solid #34343c}
+.body::before,.body::after{content:"";position:absolute;width:3px;background:#34343c;border-radius:3px}
+.body::before{left:-5px;top:20%;height:9%}
+.body::after{right:-5px;top:26%;height:14%}
+.island{position:absolute;top:2.4%;left:50%;width:28%;height:2.2%;background:#000;border-radius:99px;transform:translateX(-50%);z-index:3}
+.phone .view{border-radius:12% / 5.6%}
+.phone .view iframe{width:375px;height:812px}
+
+/* ── etiquetas ── */
+.tag{z-index:5;position:absolute;font-family:'Baloo 2',sans-serif;font-weight:800;background:#fff;border-radius:99px;padding:6px 16px;box-shadow:0 10px 20px -10px rgba(58,27,19,.5);font-size:.95rem}
+.tag.t1{left:2%;top:-18px;transform:rotate(-3deg)}
+.tag.t2{right:2%;top:-18px;transform:rotate(3deg)}
+.hint{text-align:center;margin-top:60px;font-weight:700;opacity:.7}
+
+@media(max-width:760px){
+  .laptop{width:100%}
+  .phone{position:relative;right:auto;bottom:auto;width:62%;margin:44px auto 0}
+  .tag.t1{left:0}.tag.t2{right:auto;left:50%;top:-14px;transform:translateX(-50%) rotate(2deg)}
+  .phone .tag.t2{display:block}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Deliciosos <b>Postres</b></h1>
+  <p>Así se ve en computador y en celular · las pantallas son la página real, ¡puedes tocarlas!</p>
+</header>
+
+<div class="stage" id="stage">
+  <span class="tag t1">💻 Computador</span>
+  <div class="laptop" id="laptop">
+    <div class="lid"><div class="view" id="vLap"><iframe src="index.html?mockup" title="Vista en computador" loading="eager"></iframe></div></div>
+    <div class="base"></div>
+  </div>
+
+  <div class="phone" id="phone">
+    <span class="tag t2" style="top:-34px;right:6%">📱 Celular</span>
+    <div class="body"><span class="island"></span>
+      <div class="view" id="vPh"><iframe src="index.html?mockup" title="Vista en celular" loading="eager"></iframe></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Ajusta el tamaño de cada pantalla según el espacio disponible */
+function fit(viewId, baseW, baseH){
+  const v = document.getElementById(viewId), f = v.firstElementChild;
+  const s = v.clientWidth / baseW;
+  v.style.height = (baseH * s) + "px";
+  f.style.transform = "scale(" + s + ")";
+}
+function layout(){ fit("vLap", 1280, 800); fit("vPh", 375, 812); }
+addEventListener("resize", layout); addEventListener("load", layout); layout();
+</script>
+</body>
+</html>
